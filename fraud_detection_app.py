@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 import joblib
 
-
 # Load the trained fraud detection model
 model = joblib.load("fraud_detection_model.pkl")
 
@@ -45,6 +44,11 @@ input_data["type"] = input_data["type"].map(type_mapping)
 
 # Make Prediction
 if st.button("🔍 Predict Fraud"):
+    # Ensure the input data has the same columns as the training data
+    expected_columns = model.feature_names_in_ if hasattr(model, 'feature_names_in_') else None
+    if expected_columns is not None:
+        input_data = input_data[expected_columns]
+    
     probability = model.predict_proba(input_data)[:, 1][0]  # Get fraud probability
     prediction = "🚨 Fraudulent Transaction" if probability > 0.5 else "✅ Legitimate Transaction"
     
@@ -56,4 +60,3 @@ if st.button("🔍 Predict Fraud"):
     # Add warning if fraud probability is high
     if probability > 0.8:
         st.warning("⚠️ High fraud risk detected! Consider reviewing this transaction.")
-
