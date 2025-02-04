@@ -1,6 +1,8 @@
 import streamlit as st
+import numpy as np
 import pandas as pd
 import joblib
+
 
 # Load the trained fraud detection model
 model = joblib.load("fraud_detection_model.pkl")
