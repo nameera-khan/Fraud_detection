@@ -1,0 +1,11 @@
+from sklearn.preprocessing import StandardScaler
+import joblib
+
+# Instantiate the scaler
+scaler = StandardScaler()
+
+# Fit the scaler on the training data
+scaler.fit(X_train[["amount", "oldbalanceOrg", "newbalanceOrig", "oldbalanceDest", "newbalanceDest"]])
+
+# Save the scaler for later use
+joblib.dump(scaler, "scaler.pkl")
