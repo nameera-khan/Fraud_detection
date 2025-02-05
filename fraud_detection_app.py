@@ -3,8 +3,9 @@ import numpy as np
 import pandas as pd
 import joblib
 
-# Load the trained fraud detection model
+# Load the trained fraud detection model and scaler
 model = joblib.load("fraud_detection_model.pkl")
+scaler = joblib.load("scaler.pkl")  # Load the saved scaler
 
 # Streamlit App Title
 st.title("🔍 Fraud Detection App")
@@ -42,10 +43,9 @@ input_data = pd.DataFrame({
 type_mapping = {"CASH-IN": 0, "CASH-OUT": 1, "TRANSFER": 2, "PAYMENT": 3, "DEBIT": 4}
 input_data["type"] = input_data["type"].map(type_mapping)
 
-scaler = joblib.load("scaler.pkl")  # Load the saved scaler
+# Scale numeric features using the loaded scaler
 input_data[["amount", "oldbalanceOrg", "newbalanceOrig", "oldbalanceDest", "newbalanceDest"]] = \
     scaler.transform(input_data[["amount", "oldbalanceOrg", "newbalanceOrig", "oldbalanceDest", "newbalanceDest"]])
-
 
 # Make Prediction
 if st.button("🔍 Predict Fraud"):
@@ -57,7 +57,6 @@ if st.button("🔍 Predict Fraud"):
     probability = model.predict_proba(input_data)[:, 1][0]
     prediction = "Fraudulent Transaction" if probability > 0.9781 else "Legitimate Transaction"
 
-    
     # Display Results
     st.subheader("Prediction Result")
     st.write(f"**Result:** {prediction}")
