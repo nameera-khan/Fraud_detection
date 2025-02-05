@@ -42,6 +42,11 @@ input_data = pd.DataFrame({
 type_mapping = {"CASH-IN": 0, "CASH-OUT": 1, "TRANSFER": 2, "PAYMENT": 3, "DEBIT": 4}
 input_data["type"] = input_data["type"].map(type_mapping)
 
+scaler = joblib.load("scaler.pkl")  # Load the saved scaler
+input_data[["amount", "oldbalanceOrg", "newbalanceOrig", "oldbalanceDest", "newbalanceDest"]] = \
+    scaler.transform(input_data[["amount", "oldbalanceOrg", "newbalanceOrig", "oldbalanceDest", "newbalanceDest"]])
+
+
 # Make Prediction
 if st.button("🔍 Predict Fraud"):
     # Ensure the input data has the same columns as the training data
@@ -49,8 +54,9 @@ if st.button("🔍 Predict Fraud"):
     if expected_columns is not None:
         input_data = input_data[expected_columns]
     
-    probability = model.predict_proba(input_data)[:, 1][0]  # Get fraud probability
-    prediction = "🚨 Fraudulent Transaction" if probability > 0.5 else "✅ Legitimate Transaction"
+    probability = model.predict_proba(input_data)[:, 1][0]
+    prediction = "Fraudulent Transaction" if probability > 0.9781 else "Legitimate Transaction"
+
     
     # Display Results
     st.subheader("Prediction Result")
