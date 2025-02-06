@@ -25,7 +25,6 @@ oldbalanceOrg = st.number_input("Sender's Old Balance", min_value=0.0, max_value
 newbalanceOrig = st.number_input("Sender's New Balance", min_value=0.0, max_value=1000000.0, value=4000.0)
 oldbalanceDest = st.number_input("Recipient's Old Balance", min_value=0.0, max_value=1000000.0, value=2000.0)
 newbalanceDest = st.number_input("Recipient's New Balance", min_value=0.0, max_value=1000000.0, value=3000.0)
-isFlaggedFraud = st.selectbox("Is Flagged Fraud?", [0, 1])
 
 # Convert Inputs to DataFrame
 input_data = pd.DataFrame({
@@ -35,8 +34,7 @@ input_data = pd.DataFrame({
     "oldbalanceOrg": [oldbalanceOrg],
     "newbalanceOrig": [newbalanceOrig],
     "oldbalanceDest": [oldbalanceDest],
-    "newbalanceDest": [newbalanceDest],
-    "isFlaggedFraud": [isFlaggedFraud]
+    "newbalanceDest": [newbalanceDest]
 })
 
 # Mapping transaction type to numerical values (if needed)
