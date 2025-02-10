@@ -35,11 +35,3 @@ The following features were used to train the model:
   - F1 Score: `83.44%`
 - **Custom Threshold**: The default decision threshold (0.5) was optimized to `0.9781` to balance precision and recall.
 
----
-
-## **Usage Instructions**
-
-### **1. Requirements**
-Ensure the following libraries are installed:
-```bash
-pip install scikit-learn pandas streamlit joblib
