@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the trained XGBoost model
-model = joblib.load('XGBmodel.pkl')
+model = joblib.load('XGBmodel-2.pkl')
 
 # Function to preprocess input data
 def preprocess_input(input_data):
