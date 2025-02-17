@@ -27,13 +27,12 @@ The following features were used to train the model:
 
 ## **Model Details**
 
-- **Model Type**: Random Forest Classifier
+- **Model Type**: XGBoost 
 - **Library**: Scikit-learn
 - **Performance**:
   - Precision: `99.33%`
   - Recall: `99.61%`
   - F1 Score: `99.47%`
-- **Custom Threshold**: The default decision threshold (0.5) was optimized to `0.9781` to balance precision and recall.
 
 ## **Run the App Online (No Installation Needed)**
 
