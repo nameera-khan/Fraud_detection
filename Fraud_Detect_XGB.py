@@ -1,4 +1,3 @@
-# prompt: write code to build a streamlit app for the XGBoost model above 
 
 import streamlit as st
 import pandas as pd
